@@ -19,7 +19,7 @@ func AdjustGitopsRepo(cloudProvider, clusterName, clusterType, gitopsRepoDir, gi
 
 	//* clean up all other platforms
 	for _, platform := range pkg.SupportedPlatforms {
-		if platform != fmt.Sprintf("%s-%s", CloudProvider, gitProvider) {
+		if platform != fmt.Sprintf("%s-%s-adapted", CloudProvider, gitProvider) {
 			os.RemoveAll(gitopsRepoDir + "/" + platform)
 		}
 	}
@@ -39,10 +39,10 @@ func AdjustGitopsRepo(cloudProvider, clusterName, clusterType, gitopsRepoDir, gi
 	}
 
 	//* copy $cloudProvider-$gitProvider/* $HOME/.k1/gitops/
-	driverContent := fmt.Sprintf("%s/%s-%s/", gitopsRepoDir, CloudProvider, gitProvider)
+	driverContent := fmt.Sprintf("%s/%s-%s-adapted/", gitopsRepoDir, CloudProvider, gitProvider)
 	err := cp.Copy(driverContent, gitopsRepoDir, opt)
 	if err != nil {
-		log.Info().Msgf("Error populating gitops repository with driver content: %s. error: %s", fmt.Sprintf("%s-%s", CloudProvider, gitProvider), err.Error())
+		log.Info().Msgf("Error populating gitops repository with driver content: %s. error: %s", fmt.Sprintf("%s-%s-adapted", CloudProvider, gitProvider), err.Error())
 		return err
 	}
 	os.RemoveAll(driverContent)

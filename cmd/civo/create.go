@@ -169,10 +169,10 @@ func createCivo(cmd *cobra.Command, args []string) error {
 		if err != nil {
 			return err
 		}
-		err = gitHubHandler.CheckGithubOrganizationPermissions(cGitToken, githubOrgFlag, githubUser)
-		if err != nil {
-			return err
-		}
+		// err = gitHubHandler.CheckGithubOrganizationPermissions(cGitToken, githubOrgFlag, githubUser)
+		// if err != nil {
+		// 	return err
+		// }
 		viper.Set("flags.github-owner", githubOrgFlag)
 		viper.WriteConfig()
 	case "gitlab":
